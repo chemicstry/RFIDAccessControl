@@ -10,14 +10,14 @@ template<typename T>
 class EventEmitter
 {
 public:
-    typedef std::function<void(T&)> EventCb;
+    typedef std::function<void(const T&)> EventCb;
 
-    void On(std::string name, EventCb listener)
+    void On(const std::string& name, const EventCb& listener)
     {
         _events[name].push_back(listener);
     }
 
-    void Emit(std::string name, T& data)
+    void Emit(const std::string& name, const T& data)
     {
         auto event = _events.find(name);
 

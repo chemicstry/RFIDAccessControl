@@ -7,7 +7,7 @@ JsonEventInterface::JsonEventInterface(JsonDataInterface& dataif): _dataif(datai
     dataif.SetCb(std::bind(&JsonEventInterface::_OnReceiveData, this, _1));
 }
 
-void JsonEventInterface::Send(std::string name, JsonObject& args)
+void JsonEventInterface::Send(const std::string name, const JsonObject& args)
 {
     StaticJsonBuffer<200> jsonBuffer;
 
@@ -18,7 +18,7 @@ void JsonEventInterface::Send(std::string name, JsonObject& args)
     _dataif.Send(object);
 }
 
-void JsonEventInterface::_OnReceiveData(JsonObject& data)
+void JsonEventInterface::_OnReceiveData(const JsonObject& data)
 {
     Emit(data["event"].as<char*>(), data["args"]);
 }

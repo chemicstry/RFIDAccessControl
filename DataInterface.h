@@ -7,7 +7,7 @@ template<typename T>
 class DataInterface
 {
 private:
-    typedef std::function<void(T&)> DataCb;
+    typedef std::function<void(const T&)> DataCb;
     DataCb& _rxcb;
     DataCb& _txcb;
 
@@ -19,7 +19,7 @@ public:
         _rxcb = rxcb;
     }
 
-    void Send(T& data)
+    void Send(const T& data)
     {
         if (_txcb)
             _txcb(data);
@@ -30,7 +30,7 @@ template<typename T>
 class BidirectionalDataInterface
 {
 private:
-    typedef std::function<void(T&)> DataCb;
+    typedef std::function<void(const T&)> DataCb;
     DataCb _downstreamCb, _upstreamCb;
 
 public:
